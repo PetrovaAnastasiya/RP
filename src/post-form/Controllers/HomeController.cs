@@ -31,11 +31,6 @@ namespace post_form.Controllers
             return View();
         }
 
-        public IActionResult Result()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -49,8 +44,9 @@ namespace post_form.Controllers
             var client = new Job.JobClient(channel);
             var reply = await client.RegisterAsync(
                               new RegisterRequest { Description = description });
-            ViewData["Message"] = "Task id = " + reply.Id + " Description = " + description;
-            return Ok("Task id = " + reply.Id + " Description = " + description);
+            //return View("Result", new ViewModel { Id = "Task id = " + reply.Id + " Description = " + description});
+            return View("Result", new ViewModel { Id = reply.Id});
+        
         }
     }
 }
